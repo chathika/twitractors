@@ -1,5 +1,6 @@
 import json
 import sys
+from collections import Counter
 
 '''
 
@@ -25,7 +26,11 @@ with open (fileName) as f:
 if not users_who_tweet:
     print("Something went wrong the list is empty")
 else:
-    print("The total length is " + len(str(users_who_tweet)))
+    print("The total length is " + str(len(users_who_tweet)))
+    users = Counter(users_who_tweet)
+    print("Unique Users" + str(len(set(users))))
+    print(users.most_common(10))
+    print(str(len({k:v for (k,v) in users.items() if v > 1})))
 #file_out = open("user_analytics.csv", "a+")
 #file_out.write("time,polarity,subjectivity\n")
 #for tweet_text in tweet_texts:
