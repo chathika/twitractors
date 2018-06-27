@@ -17,6 +17,5 @@ for i, row in all_data.iterrows():
     print(date + datetime.timedelta(milliseconds= float("%.2f" % (dates[date] - dates_used[date] * (1000 / dates[date])))) ) 
     date_temp = date + datetime.timedelta(milliseconds= float("%.2f" % (dates[date] - dates_used[date] * (1000 / dates[date]))) )
     dates_used[date] = dates_used[date] - 1
-    date = date_temp
     all_data.at[i,"time"] = date_temp
 all_data.to_csv(sys.argv[1])
