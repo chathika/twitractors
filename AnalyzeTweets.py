@@ -18,6 +18,7 @@ print(count)
 
 def clean_tweet( tweet):
     cleanString = re.sub('\n',' ', tweet )
+    cleanString = re.sub('\r',' ', tweet )
     cleanString = re.sub(',',' ', cleanString )
     return cleanString
     #return ' '.join(re.sub("(#@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
