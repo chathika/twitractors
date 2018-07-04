@@ -17,9 +17,11 @@ with open (fileName) as f:
 print(count)
 
 def clean_tweet( tweet):
-    cleanString = re.sub('\W+',' ', tweet )
+    cleanString = re.sub('\n',' ', tweet )
+    cleanString = re.sub(',',' ', cleanString )
     return cleanString
     #return ' '.join(re.sub("(#@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+
 '''
 file_out = open("sentiment_timeseries.csv", "w+")
 file_out.write("time,polarity,subjectivity\n")
@@ -30,10 +32,10 @@ for tweet_text in tweet_texts:
     file_out.write(tweet_sentiment)
 '''
 file_out = open("text_location_timeseries.csv", "w+")
-file_out.write("time,text,location\n")
+file_out.write("time,text,location,lang\n")
 for tweet_text in tweet_texts:
     if tweet_text[1] != None:
-        text = clean_tweet(unicode(tweet_text[1].encode("utf-8"), errors='ignore') )
+        text = clean_tweet(unicode(tweet_text[1].encode("utf-8"), errors='ignore'))
     if tweet_text[2] != None: 
         location = clean_tweet(unicode(tweet_text[2].encode("utf-8"), errors='ignore') )
     if tweet_text[3] != None: 
