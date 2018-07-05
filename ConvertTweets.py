@@ -22,24 +22,31 @@ writer.writerow(fields) #writes field
 
 for line in data_python:
     def find_null(line, t):
-        if line[t] is None:
+        if 'created_at' not in line or line[t] is None:
             return "null"
         else:
             return line.get(t).encode('ascii', 'ignore')
-
+    def find_nulll(line, t):
+        if 'text' not in line or line[t] is None:
+            return "null"
+        else:
+            return line.get(t).encode('ascii', 'ignore')
     def find(line, t, r):
-        if line[t][r] is None:
+        if 'coordinates' not in line or line[t][r] is None:
             return "null"
         else:
             return line.get(t).get(r).encode('ascii', 'ignore')
-
     def find_blah(line, t, r, u):
-        if line[t][r][u] is None:
+        if 'place' not in line:
+            return "null"
+        elif line[t][r] is None:
             return "null"
         else:
             return line.get(t).get(r).get(u).encode('ascii', 'ignore')
     def find_coor(line, t, r, u):
-        if line[t][r][u] is None:
+        if 'coordiates' not in line:
+            return "null", "null"
+        elif line[t][r] is None:
             return "null", "null"
         else:
             coor = line.get(t).get(r).get(u).encode('ascii', 'ignore')
@@ -49,7 +56,7 @@ for line in data_python:
     # #writes a row and gets the fields from the json object
     # #screen_name and followers/friends are found on the second level hence two get methods
     create = find_null(line, 'created_at')
-    text = find_null(line, 'text')
+    text = find_nulll(line, 'text')
     loc = find(line, 'user', 'location')
     lang = find(line, 'user', 'lang')
     country = find_blah(line, 'user', 'place', 'country_code')
